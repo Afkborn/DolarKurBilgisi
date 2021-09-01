@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dolar Fiyat Bilgisi</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Features-Blue.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <section class="features-blue">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Türk Lirası</h2>
+                <p id="guncellemeTarihi" class="text-center">guncellemeTarihi</p>
+            </div>
+            <div class="row features">
+                <div class="col-sm-6 col-md-4 item"><i class="fa fa-usd icon"></i>
+                    <h3 class="name">Dolar&nbsp;</h3>
+                    <p id="dolarKuruAlis" class="description">dolarAlis</p>
+                    <p id="dolarKuruSatis" class="description">dolarSatis</p>
+                </div>
+                <div class="col-sm-6 col-md-4 item"></div>
+                <div class="col-sm-6 col-md-4 item"><i class="fa fa-euro icon"></i>
+                    <h3 class="name">Euro</h3>
+                    <p id="euroKuruAlis" class="description">euroAlis</p>
+                    <p id="euroKuruSatis" class="description">euroSatis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $.getJSON('https://finans.truncgil.com/today.json', function(data) {
+            $.each( data, function( key, val ) {
+                console.log(key)
+                    if (key =="USD"){
+                        $.each(val , function(index,value){
+
+                            if (index=="Alış"){
+                                document.getElementById("dolarKuruAlis").innerHTML = `Alış Fiyatı =  ${value} TL`;
+                                
+                            }
+                            if (index=="Satış"){
+                                document.getElementById("dolarKuruSatis").innerHTML = `Satış Fiyatı =  ${value} TL`;
+                            }
+                        } );
+                    }
+                    if (key =="EUR"){
+                        $.each(val , function(index,value){
+                        if (index=="Alış"){
+                            document.getElementById("euroKuruAlis").innerHTML = `Alış Fiyatı =  ${value} TL`;
+                            
+                        }
+                        if (index=="Satış"){
+                            document.getElementById("euroKuruSatis").innerHTML = `Satış Fiyatı =  ${value} TL`;
+                        }
+                        } );
+                    }
+                    if (key == "Update_Date"){
+                        document.getElementById("guncellemeTarihi").innerHTML = `${val}`;
+                    }
+            });
+        });
+    
+</script>
+</body>
+
+</html>
